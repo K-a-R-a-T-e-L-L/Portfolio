@@ -1,0 +1,49 @@
+* {
+  box-sizing: border-box;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: grid;
+  place-items: center;
+}
+
+button {
+  cursor: pointer;
+  user-select: none;
+}
+
+li {
+  user-select: none;
+}
+
+select {
+  cursor: pointer;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  cursor: pointer;
+}
+
+.app {
+  width: 100vw;
+  height: 400vh;
+  position: relative;
+}
+
+.main {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: lightcyan;
+  display: flex;
+  justify-content: center;
+}
+
+.Link {
+  text-decoration: none;
+  color: none;
+}
