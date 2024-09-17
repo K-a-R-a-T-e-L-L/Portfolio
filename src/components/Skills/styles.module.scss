@@ -1,0 +1,100 @@
+.skills {
+
+    display: flex;
+    justify-content: center;
+
+    .skills__box_buttons {
+        position: absolute;
+        left: 30px;
+        top: 40px;
+        width: 80px;
+        height: 25px;
+        display: flex;
+        justify-content: space-between;
+
+        .box_buttons__bitton_language {
+            background-color: black;
+            font-size: 12px;
+            width: 35%;
+            border-radius: 5px;
+            border: 0.5px solid rgba(0, 255, 255, 0.284);
+            transition: box-shadow 0.15s ease;
+
+            &:hover {
+                box-shadow: 3px 3px 5px 0.1px rgba(0, 255, 255, 0.198);
+            }
+
+            &:active {
+                box-shadow: 0px 0px 5px 0.1px rgba(0, 255, 255, 0.387);
+                transform: scale(0.99);
+            }
+        }
+    }
+
+    .skills__back {
+        background-color: black;
+        width: 80px;
+        height: 30px;
+        border: 1px solid rgba(0, 255, 255, 0.212);
+        border-radius: 3px;
+        position: absolute;
+        top: 80px;
+        left: 30px;
+        font-weight: 700;
+
+        &:hover {
+            box-shadow: 3px 3px 5px 0.1px rgba(0, 255, 255, 0.198);
+        }
+
+        &:active {
+            box-shadow: 0px 0px 5px 0.1px rgba(0, 255, 255, 0.387);
+            transform: scale(0.99);
+        }
+    }
+
+    .skills__box {
+        width: 70%;
+        min-height: 700px;
+        padding: 10px;
+        position: relative;
+        top: 10px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+
+        .box__skill {
+            width: 200px;
+            height: 100px;
+            margin-right: 20px;
+            border: 1px solid rgba(0, 255, 255, 0.301);
+            cursor: pointer;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            column-gap: 10px;
+            border-radius: 5px;
+
+            &:hover{
+                border: 1px solid rgba(0, 255, 255, 0.643);
+                .skill__text{
+                    text-shadow: 0px 0px 10px aqua !important;
+                }
+            }
+
+            .skill__logo {
+                width: 40px;
+                height: 40px;
+                background-size: contain;
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+
+            .skill__text{
+                font-size: 25px;
+            }
+        }
+    }
+}
