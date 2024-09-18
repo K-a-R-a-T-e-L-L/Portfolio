@@ -1,11 +1,12 @@
 import axios from "axios";
 import { requestTextTranslation } from "./requestTextTranslation";
 
-export const handleGettingRandomPhrase = async ({setTranslationError, setPhrase, setLoading, t}) => {
+export const handleGettingRandomPhrase = async ({ setTranslationError, setPhrase, DisplayButton, setLoading, t }) => {
     setLoading(true);
     try {
         const res = await axios.get("https://api.quotable.io/random");
-        await requestTextTranslation(`«${res.data.content}»`, 'en|ru')
+        const Language = DisplayButton === 'en' ? 'ru' : 'en';
+        await requestTextTranslation(`«${res.data.content}»`, `${Language}|${DisplayButton}`)
             .then(translated => {
                 if (translated !== 'NO QUERY SPECIFIED. EXAMPLE REQUEST: GET?Q=HELLO&LANGPAIR=EN|IT') {
                     setPhrase(translated);
@@ -21,7 +22,8 @@ export const handleGettingRandomPhrase = async ({setTranslationError, setPhrase,
     catch (err) {
         try {
             const res = await axios.get("https://api.adviceslip.com/advice");
-            await requestTextTranslation(`«${res.data.slip.advice}»`, 'en|ru')
+            const Language = DisplayButton === 'en' ? 'ru' : 'en';
+            await requestTextTranslation(`«${res.data.slip.advice}»`, `${Language}|${DisplayButton}`)
                 .then(translated => {
                     if (translated !== 'NO QUERY SPECIFIED. EXAMPLE REQUEST: GET?Q=HELLO&LANGPAIR=EN|IT') {
                         setPhrase(translated);
@@ -42,5 +44,5 @@ export const handleGettingRandomPhrase = async ({setTranslationError, setPhrase,
     }
     finally {
         setLoading(false)
-    };    
+    };
 };

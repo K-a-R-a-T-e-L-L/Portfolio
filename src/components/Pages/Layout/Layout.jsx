@@ -1,3 +1,4 @@
+import Contacts from '../Contacts/Contacts';
 import Home from '../Home/Home';
 import Skills from '../Skills/Skills';
 import style from './styles.module.scss';
@@ -10,6 +11,7 @@ const Layout = () => {
                 <Routes>
                     <Route path='/' element={<Home />} />
                     <Route path='/skills' element={<Skills />} />
+                    <Route path='/contacts' element={<Contacts />} />
                 </Routes>
             </div>
         </>

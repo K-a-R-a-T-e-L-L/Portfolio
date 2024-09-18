@@ -1,0 +1,20 @@
+.back {
+    background-color: black;
+    width: 80px;
+    height: 30px;
+    border: 1px solid rgba(0, 255, 255, 0.212);
+    border-radius: 3px;
+    position: absolute;
+    top: 80px;
+    left: 30px;
+    font-weight: 700;
+
+    &:hover {
+        box-shadow: 3px 3px 5px 0.1px rgba(0, 255, 255, 0.198);
+    }
+
+    &:active {
+        box-shadow: 0px 0px 5px 0.1px rgba(0, 255, 255, 0.387);
+        transform: scale(0.99);
+    }
+}

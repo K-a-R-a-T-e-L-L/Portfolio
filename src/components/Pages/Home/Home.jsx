@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import style from './styles.module.scss';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { handleGettingRandomPhrase } from '../../services/functionsHomeComponent/handleGettingRandomPhrase';
-import { translatingPageContent } from '../../services/functionsHomeComponent/translatingPageContent';
+import { handleGettingRandomPhrase } from '../../../services/functionsHomeComponent/handleGettingRandomPhrase';
+import { translatingPageContent } from '../../../services/functionsHomeComponent/translatingPageContent';
+import LanguageChangeButtons from '../../Reused/LanguageChangeButtons/LanguageChangeButtons';
+import { useLocalStorage } from '../../../hooks/useLocalStorage/useLocalStorage';
 
 const Home = () => {
 
@@ -13,7 +15,7 @@ const Home = () => {
 
     const [Phrase, setPhrase] = useState('');
     const [Loading, setLoading] = useState(true);
-    const [DisplayButton, setDisplayButton] = useState('ru');
+    const [DisplayButton, setDisplayButton] = useLocalStorage('page-language', 'ru');
     const [TranslationError, setTranslationError] = useState(null);
 
     const handleRoutePath = (path) => {
@@ -26,11 +28,11 @@ const Home = () => {
     };
 
     useEffect(() => {
-        handleGettingRandomPhrase({setTranslationError, setPhrase, setLoading, t});
+        handleGettingRandomPhrase({ setTranslationError, setPhrase, DisplayButton, setLoading, t });
     }, []);
 
     useEffect(() => {
-        translatingPageContent({setTranslationError, setPhrase, setLoading, DisplayButton, Phrase});
+        translatingPageContent({ setTranslationError, setPhrase, setLoading, DisplayButton, Phrase });
     }, [DisplayButton]);
 
     useEffect(() => {
@@ -48,28 +50,13 @@ const Home = () => {
     }, [i18n.language]);
 
     useEffect(() => {
-        changeLanguage('ru');
+        changeLanguage(DisplayButton);
     }, []);
 
     return (
         <div className={style.app}>
             <main className={style.app__main}>
-                <div className={style.main__box_buttons}>
-                    <button
-                        onClick={() => changeLanguage('en')}
-                        className={style.box_buttons__bitton_language}
-                        style={DisplayButton === 'ru' ? { opacity: 0.5 } : null}
-                    >
-                        en
-                    </button>
-                    <button
-                        onClick={() => changeLanguage('ru')}
-                        className={style.box_buttons__bitton_language}
-                        style={DisplayButton === 'en' ? { opacity: 0.5 } : null}
-                    >
-                        ru
-                    </button>
-                </div>
+                <LanguageChangeButtons DisplayButton={DisplayButton} setDisplayButton={setDisplayButton} left={'100px'} />
                 <div className={style.main__avatar}></div>
                 <h1 className={style.main__name}>{t("name")}</h1>
                 <h4 className={style.main__status}>{t("status")}</h4>
@@ -83,18 +70,18 @@ const Home = () => {
                             </div>
                         </>
                     ) : (
-                            <>{Phrase}</>
+                        <>{Phrase}</>
                     )}
                 </h2>
                 <div className={style.main__menu}>
                     <button className={style.menu__button}>{t("oneButt")}</button>
-                    <button className={style.menu__button}>{t("twoButt")}</button>
+                    <button className={style.menu__button} onClick={() => handleRoutePath('./contacts')}>{t("twoButt")}</button>
                     <button className={style.menu__button}>{t("threeButt")}</button>
                     <button className={style.menu__button} onClick={() => handleRoutePath('./skills')}>{t("fourButt")}</button>
                 </div>
             </main>
         </div>
     );
-}
+};
 
 export default Home;

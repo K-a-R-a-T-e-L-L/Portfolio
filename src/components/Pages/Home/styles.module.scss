@@ -10,38 +10,10 @@
         align-items: center;
         justify-content: space-evenly;
 
-        .main__box_buttons {
-            position: absolute;
-            left: 100px;
-            top: 40px;
-            width: 80px;
-            height: 25px;
-            display: flex;
-            justify-content: space-between;
-
-            .box_buttons__bitton_language {
-                background-color: black;
-                font-size: 12px;
-                width: 35%;
-                border-radius: 5px;
-                border: 0.5px solid rgba(0, 255, 255, 0.284);
-                transition: box-shadow 0.15s ease;
-
-                &:hover {
-                    box-shadow: 3px 3px 5px 0.1px rgba(0, 255, 255, 0.198);
-                }
-
-                &:active {
-                    box-shadow: 0px 0px 5px 0.1px rgba(0, 255, 255, 0.387);
-                    transform: scale(0.99);
-                }
-            }
-        }
-
         .main__avatar {
             width: 200px;
             height: 200px;
-            background: url(../../images/ava.png);
+            background: url(../../../images/ava.png);
             background-size: cover;
             border-radius: 100%;
             border: 1px solid rgba(0, 255, 255, 0.252);
