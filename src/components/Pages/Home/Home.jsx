@@ -74,10 +74,10 @@ const Home = () => {
                     )}
                 </h2>
                 <div className={style.main__menu}>
-                    <button className={style.menu__button}>{t("oneButt")}</button>
-                    <button className={style.menu__button} onClick={() => handleRoutePath('./contacts')}>{t("twoButt")}</button>
-                    <button className={style.menu__button}>{t("threeButt")}</button>
-                    <button className={style.menu__button} onClick={() => handleRoutePath('./skills')}>{t("fourButt")}</button>
+                    <button className={style.menu__button}>{t("aboutButton")}</button>
+                    <button className={style.menu__button} onClick={() => handleRoutePath('./contacts')}>{t("contactsButton")}</button>
+                    <button className={style.menu__button}>{t("projectsButton")}</button>
+                    <button className={style.menu__button} onClick={() => handleRoutePath('./skills')}>{t("skillsButton")}</button>
                 </div>
             </main>
         </div>

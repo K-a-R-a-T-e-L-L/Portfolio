@@ -1,10 +1,11 @@
 {
     "name": "Sukhorukov Kirill Sergeevich",
     "status": "Junior frontend developer",
-    "oneButt": "About me",
-    "twoButt": "Contacts",
-    "threeButt": "Projects",
-    "fourButt": "Skills",
-    "backButt": "< Back",
-    "phrase": "«Find a case you like, and you won't have to work a single day in your life. — Confucius.»"
+    "aboutButton": "About me",
+    "contactsButton": "Contacts",
+    "projectsButton": "Projects",
+    "skillsButton": "Skills",
+    "backButton": "< Back",
+    "phrase": "«Find a case you like, and you won't have to work a single day in your life. — Confucius.»",
+    "contact": "Ways to contact me:"
 }

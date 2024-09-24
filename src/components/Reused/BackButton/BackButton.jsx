@@ -13,7 +13,7 @@ const BackButton = ({pathBack}) => {
 
     return (
         <>
-            <button onClick={() => handleRoutePath(pathBack)} className={style.back}>{t("backButt")}</button>
+            <button onClick={() => handleRoutePath(pathBack)} className={style.back}>{t("backButton")}</button>
         </>
     );
 };
