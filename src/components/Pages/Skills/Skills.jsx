@@ -3,8 +3,10 @@ import style from './styles.module.scss';
 import { useEffect } from 'react';
 import { SkillsArray } from './index';
 import LanguageChangeButtons from '../../Reused/LanguageChangeButtons/LanguageChangeButtons';
-import { useLocalStorage } from '../../../hooks/useLocalStorage/useLocalStorage';
 import BackButton from '../../Reused/BackButton/BackButton';
+import { useLocalStorage } from '../../../hooks/useLocalStorage/useLocalStorage';
+import {LazyLoadImage} from 'react-lazy-load-image-component';
+import NoImage from '../../../images/noImg.png'
 
 const Skills = () => {
 
@@ -29,7 +31,7 @@ const Skills = () => {
                     {SkillsArray.map((el, i) => {
                         return (
                             <div className={style.box__skill} key={i}>
-                                <div className={style.skill__logo} style={{ backgroundImage: `URL(${el.logo})` }}></div>
+                                <LazyLoadImage className={style.skill__logo} alt='Image logo' src={el.logo} placeholderSrc={NoImage} />
                                 <h4 className={style.skill__text}>{el.skill}</h4>
                             </div>
                         )

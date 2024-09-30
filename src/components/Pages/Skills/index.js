@@ -8,7 +8,7 @@ import TSImg from '../../../images/ts.png';
 import PostgreImg from '../../../images/postgre.png';
 import SQLite3Img from '../../../images/sqlite3.png';
 import GitImg from '../../../images/git.png';
-import GitHubImg from '../../../images/github.png';
+import GitHubImg from '../../../images/gh.png';
 import NodeImg from '../../../images/node.png';
 import ExpressImg from '../../../images/express.png';
 import NPMImg from '../../../images/npm.png';

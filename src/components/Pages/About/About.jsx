@@ -32,7 +32,7 @@ const About = () => {
                     <h5>{t('info')}</h5>
                 </div>
                 <figure>
-                    <img src={CertificateImg} alt="Certificate" title='CertificateImg' />
+                    <img src={CertificateImg} alt="Certificate" title='Certificate image' />
                     <figcaption>{t('certificate')}</figcaption>
                 </figure>
             </div>

@@ -6,6 +6,9 @@ import { handleGettingRandomPhrase } from '../../../services/functionsHomeCompon
 import { translatingPageContent } from '../../../services/functionsHomeComponent/translatingPageContent';
 import LanguageChangeButtons from '../../Reused/LanguageChangeButtons/LanguageChangeButtons';
 import { useLocalStorage } from '../../../hooks/useLocalStorage/useLocalStorage';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import Ava from '../../../images/ava.png';
+import AvaPreview from '../../../images/avaPreview.png';
 
 const Home = () => {
 
@@ -57,7 +60,9 @@ const Home = () => {
         <div className={style.app}>
             <main className={style.app__main}>
                 <LanguageChangeButtons DisplayButton={DisplayButton} setDisplayButton={setDisplayButton} left={'100px'} />
-                <div className={style.main__avatar}></div>
+                <div className={style.main__avatar}>
+                    <LazyLoadImage className={style.main__avatar} src={Ava} placeholderSrc={AvaPreview} alt='Avatar' />
+                </div>
                 <h1 className={style.main__name}>{t("name")}</h1>
                 <h4 className={style.main__status}>{t("status")}</h4>
                 <h2 className={style.main__phrases}>
@@ -76,7 +81,7 @@ const Home = () => {
                 <div className={style.main__menu}>
                     <button className={style.menu__button} onClick={() => handleRoutePath('./about')}>{t("aboutButton")}</button>
                     <button className={style.menu__button} onClick={() => handleRoutePath('./contacts')}>{t("contactsButton")}</button>
-                    <button className={style.menu__button}>{t("projectsButton")}</button>
+                    <button className={style.menu__button} onClick={() => handleRoutePath('./projects')}>{t("projectsButton")}</button>
                     <button className={style.menu__button} onClick={() => handleRoutePath('./skills')}>{t("skillsButton")}</button>
                 </div>
             </main>

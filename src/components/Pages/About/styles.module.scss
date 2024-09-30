@@ -11,21 +11,52 @@
         flex-direction: column;
         row-gap: 10px;
 
+
         h2,
         h3,
         h4,
         h5 {
+            transition: transform 0.3s;
+            color: #d3ffd9;
+            margin-bottom: 15px;
+            font-family: 'Arial', sans-serif;
             text-align: center;
+
+            &:hover {
+                transform: translateY(-3px);
+            }
+
+            &:first-child {
+                font-size: 2rem;
+                font-weight: bold;
+            }
+
+            &:nth-child(2) {
+                font-size: 1.75rem;
+                font-style: italic;
+            }
+
+            &:nth-child(3) {
+                font-size: 1.5rem;
+                text-decoration: underline;
+            }
+
+            &:nth-child(4) {
+                font-size: 1.25rem;
+                color: #ebffed;
+            }
         }
     }
 
-    figure{
+    figure {
         position: relative;
         top: 70px;
-        img{
+
+        img {
             width: 550px;
         }
-        figcaption{
+
+        figcaption {
             position: absolute;
             bottom: -20px;
             font-family: cursive;
