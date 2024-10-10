@@ -9,6 +9,7 @@ import axios from 'axios';
 const Projects = () => {
 
     const [DataProjectsArray, setDataProjectsArray] = useState([]);
+    const [MoreDataProject, setMoreDataProject] = useState();
     const { i18n } = useTranslation();
     const [DisplayButton, setDisplayButton] = useLocalStorage('page-language', 'ru');
 
@@ -35,18 +36,32 @@ const Projects = () => {
                 <LanguageChangeButtons DisplayButton={DisplayButton} setDisplayButton={setDisplayButton} left={'30px'} />
                 <BackButton pathBack={'/'} />
                 <div className={style.projects__box}>
-                    {DataProjectsArray.map((el, i) => {
-                        return (
-                            <div className={style.box__project} key={i}>
-                                <div className={style.project__img}></div>
-                                <div className={style.project__info}>
-                                    <h5>{el.name}</h5>
-                                    <h6>{el.info}</h6>
-                                </div>
+                    {!MoreDataProject ? (
+                        <>
+                            {DataProjectsArray.map((el, i) => {
+                                return (
+                                    <div className={style.box__project} key={i} onClick={() => { setMoreDataProject(el) }}>
+                                        <div className={style.project__img}></div>
+                                        <div className={style.project__info}>
+                                            <h5>{el.name}</h5>
+                                            <h6>{el.info}</h6>
+                                        </div>
+                                    </div>
+                                )
+                            })}
+                            <button className={style.box__adding_button}>+</button>
+                        </>
+                    ) : (
+                        <>
+                            <div className={style.projects__more_data}>
+                                <button className={style.more_data__close} onClick={() => {setMoreDataProject()}}>✕</button>
+                                <h3>{MoreDataProject.name}</h3>
+                                <img src="" alt={MoreDataProject.img} />
+                                <p>{MoreDataProject.info}</p>
+                                <span>Ссылка на проект:&ensp;<a href={MoreDataProject.link} target="_blank" rel="noopener noreferrer">{MoreDataProject.link}</a></span>
                             </div>
-                        )
-                    })}
-                    <button className={style.box__adding_button}>+</button>
+                        </>
+                    )}
                 </div>
             </div>
         </>

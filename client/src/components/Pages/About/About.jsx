@@ -4,7 +4,9 @@ import LanguageChangeButtons from '../../Reused/LanguageChangeButtons/LanguageCh
 import style from './styles.module.scss';
 import { useLocalStorage } from '../../../hooks/useLocalStorage/useLocalStorage';
 import { useEffect } from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import CertificateImg from '../../../images/certificate.png';
+import CertificatePreviewImg from '../../../images/certificatePreview.png';
 
 const About = () => {
 
@@ -29,10 +31,9 @@ const About = () => {
                     <h2>{t('hello')}</h2>
                     <h3>{t('miniInfo')}</h3>
                     <h4>{t('purpose')}</h4>
-                    <h5>{t('info')}</h5>
                 </div>
                 <figure>
-                    <img src={CertificateImg} alt="Certificate" title='Certificate image' />
+                <LazyLoadImage className={style.about__img} src={CertificateImg} placeholderSrc={CertificatePreviewImg} alt='Certificate' title='Certificate image'/>
                     <figcaption>{t('certificate')}</figcaption>
                 </figure>
             </div>
