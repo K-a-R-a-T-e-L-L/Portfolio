@@ -8,7 +8,7 @@ const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('database.db');
 
 // db.run(`CREATE TABLE projects_data
-//     (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT NOT NULL, link TEXT NOT NULL, img BLOB NOT NULL, info TEXT NOT NULL)`);
+//     (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT NOT NULL, name_ru TEXT NOT NULL, link TEXT NOT NULL, img BLOB NOT NULL, info TEXT NOT NULL, info_ru TEXT NOT NULL)`);
 // db.run('DELETE FROM projects_data');
 
 app.use(express.json());
@@ -17,12 +17,13 @@ app.use(cors());
 app.get('/adding', async (req, res) => {
     const data = req.body;
     try {
-        db.run('INSERT INTO projects_data (name, link, img, info) VALUES(?, ?, ?, ?);', [data.name, data.link, data.img, data.info], function (err) {
-            if (err) {
-                console.log(`Error writing data: ${err}`);
-                res.send(`Error writing data: ${err}`);
-            };
-        });
+        db.run('INSERT INTO projects_data (name, name_ru, link, img, info, info_ru) VALUES(?, ?, ?, ?, ?, ?);',
+            [data.name, data.name_ru, data.link, data.img, data.info, data.info_ru], function (err) {
+                if (err) {
+                    console.log(`Error writing data: ${err}`);
+                    res.send(`Error writing data: ${err}`);
+                };
+            });
         db.all('SELECT * FROM projects_data;', (err, rows) => {
             if (err) {
                 console.log(`Error in data extraction: ${err}`);

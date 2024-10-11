@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import LanguageChangeButtons from '../../Reused/LanguageChangeButtons/LanguageChangeButtons';
 import BackButton from '../../Reused/BackButton/BackButton';
 import axios from 'axios';
+import ImgSlider from '../../Reused/ImgSlider/ImgSlider';
 
 const Projects = () => {
 
@@ -43,8 +44,8 @@ const Projects = () => {
                                     <div className={style.box__project} key={i} onClick={() => { setMoreDataProject(el) }}>
                                         <div className={style.project__img}></div>
                                         <div className={style.project__info}>
-                                            <h5>{el.name}</h5>
-                                            <h6>{el.info}</h6>
+                                            <h5>{DisplayButton === 'en' ? el.name : el.name_ru}</h5>
+                                            <h6>{DisplayButton === 'en' ? el.info : el.info_ru}</h6>
                                         </div>
                                     </div>
                                 )
@@ -54,10 +55,10 @@ const Projects = () => {
                     ) : (
                         <>
                             <div className={style.projects__more_data}>
-                                <button className={style.more_data__close} onClick={() => {setMoreDataProject()}}>✕</button>
-                                <h3>{MoreDataProject.name}</h3>
-                                <img src="" alt={MoreDataProject.img} />
-                                <p>{MoreDataProject.info}</p>
+                                <button className={style.more_data__close} onClick={() => { setMoreDataProject() }}>✕</button>
+                                <h3>{DisplayButton === 'en' ? MoreDataProject.name : MoreDataProject.name_ru}</h3>
+                                <ImgSlider elements={[1,2,3,4]}/>
+                                <p>{DisplayButton === 'en' ? MoreDataProject.info : MoreDataProject.info_ru}</p>
                                 <span>Ссылка на проект:&ensp;<a href={MoreDataProject.link} target="_blank" rel="noopener noreferrer">{MoreDataProject.link}</a></span>
                             </div>
                         </>
