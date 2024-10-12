@@ -32,8 +32,10 @@
         .window__page{
             min-width: 100%;
             min-height: 100%;
-            border: 1px solid yellow;
-            background-color: rgba(255, 0, 0, 0.09);
+            font-size: 60px;
+            border: 1px solid rgb(212, 0, 255);
+            border-radius: 10px;
+            background-color: rgb(0, 0, 0);
             display: grid;
             place-items: center;
             transition: transform 0.5s ease-in-out;

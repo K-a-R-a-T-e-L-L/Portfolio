@@ -50,7 +50,7 @@ app.get('/projects', async (req, res) => {
             }
             else {
                 res.send(rows);
-                console.table(rows);
+                console.log('good');
             }
         })
     }

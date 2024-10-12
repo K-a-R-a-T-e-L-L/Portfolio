@@ -42,8 +42,16 @@ const ImgSlider = ({ elements }) => {
                 <div className={style.slider__window}>
                     {elements.map((el, i) => {
                         return (
-                            <div className={style.window__page} key={i} style={{ transform: `translateX(${Offset}px) ${CurrentIndex !== i ? 'scale(0.85)' : ''}` }}>
-                                {el}
+                            <div 
+                            className={style.window__page} 
+                            key={i} 
+                            style={{ transform: `translateX(${Offset}px) ${CurrentIndex !== i ? 'scale(0.85)' : ''}`, opacity: `${CurrentIndex !== i ? '0.5' : '1'}` }}
+                            >
+                                {el === '+' ? (
+                                    <>Plus</>
+                                ) : (
+                                    <>{el}</>
+                                )}
                             </div>
                         )
                     })}

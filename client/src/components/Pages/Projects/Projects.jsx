@@ -5,12 +5,14 @@ import { useEffect, useState } from 'react';
 import LanguageChangeButtons from '../../Reused/LanguageChangeButtons/LanguageChangeButtons';
 import BackButton from '../../Reused/BackButton/BackButton';
 import axios from 'axios';
-import ImgSlider from '../../Reused/ImgSlider/ImgSlider';
+import ChildMoreData from './ChildMoreData';
+import ChildAddProject from './ChildAddProject';
 
 const Projects = () => {
 
     const [DataProjectsArray, setDataProjectsArray] = useState([]);
     const [MoreDataProject, setMoreDataProject] = useState();
+    const [AddingNewProject, setAddingNewProject] = useState(false);
     const { i18n } = useTranslation();
     const [DisplayButton, setDisplayButton] = useLocalStorage('page-language', 'ru');
 
@@ -39,28 +41,28 @@ const Projects = () => {
                 <div className={style.projects__box}>
                     {!MoreDataProject ? (
                         <>
-                            {DataProjectsArray.map((el, i) => {
-                                return (
-                                    <div className={style.box__project} key={i} onClick={() => { setMoreDataProject(el) }}>
-                                        <div className={style.project__img}></div>
-                                        <div className={style.project__info}>
-                                            <h5>{DisplayButton === 'en' ? el.name : el.name_ru}</h5>
-                                            <h6>{DisplayButton === 'en' ? el.info : el.info_ru}</h6>
-                                        </div>
-                                    </div>
-                                )
-                            })}
-                            <button className={style.box__adding_button}>+</button>
+                            {!AddingNewProject ? (
+                                <>
+                                    {DataProjectsArray.map((el, i) => {
+                                        return (
+                                            <div className={style.box__project} key={i} onClick={() => { setMoreDataProject(el) }}>
+                                                <div className={style.project__img}></div>
+                                                <div className={style.project__info}>
+                                                    <h5>{DisplayButton === 'en' ? el.name : el.name_ru}</h5>
+                                                    <h6>{DisplayButton === 'en' ? el.info : el.info_ru}</h6>
+                                                </div>
+                                            </div>
+                                        )
+                                    })}
+                                    <button className={style.box__adding_button} onClick={() => setAddingNewProject(true)}>+</button>
+                                </>
+                            ) : (
+                                <><ChildAddProject setAddingNewProject={setAddingNewProject} /></>
+                            )}
                         </>
                     ) : (
                         <>
-                            <div className={style.projects__more_data}>
-                                <button className={style.more_data__close} onClick={() => { setMoreDataProject() }}>✕</button>
-                                <h3>{DisplayButton === 'en' ? MoreDataProject.name : MoreDataProject.name_ru}</h3>
-                                <ImgSlider elements={[1,2,3,4]}/>
-                                <p>{DisplayButton === 'en' ? MoreDataProject.info : MoreDataProject.info_ru}</p>
-                                <span>Ссылка на проект:&ensp;<a href={MoreDataProject.link} target="_blank" rel="noopener noreferrer">{MoreDataProject.link}</a></span>
-                            </div>
+                            <ChildMoreData DisplayButton={DisplayButton} MoreDataProject={MoreDataProject} setMoreDataProject={setMoreDataProject} />
                         </>
                     )}
                 </div>
