@@ -1,10 +1,29 @@
+import { useEffect, useState } from 'react';
 import ImgSlider from '../../Reused/ImgSlider/ImgSlider';
 import style from './styles.module.scss';
 
 const ChildAddProject = ({ setAddingNewProject }) => {
+
+    const [ArrayElements, setArrayElements] = useState(['+']);
+    const [ArrayFiles, setArrayFiles] = useState([]);
+
+    const handleAddingElements = (url, file) => {
+        setArrayElements((value) => [...value, url]);
+        setArrayFiles((value) => [...value, file]);
+    };
+
+    const handleDeletingElement = (index) => {
+        setArrayElements((value) => value.filter((_, i) => i !== index));
+        setArrayFiles((value) => value.filter((_, i) => i !== index - 1));
+    };
+
+    useEffect(() => {
+        console.log(ArrayFiles);
+    }, [ArrayElements, ArrayFiles])
+    
     return (
         <div className={style.projects__adding_project}>
-            <ImgSlider elements={['+']} />
+            <ImgSlider elements={ArrayElements} handleAddingElements={handleAddingElements} handleDeletingElement={handleDeletingElement}/>
             <div className={style.adding_project__box_inputs}>
                 <input className={`${style.box_input__input} ${style.adding_project__input}`} type="text" placeholder='name ru' />
                 <input className={`${style.box_input__input} ${style.adding_project__input}`} type="text" placeholder='name' />
