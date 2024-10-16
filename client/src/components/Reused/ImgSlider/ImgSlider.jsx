@@ -1,13 +1,14 @@
 import style from './styles.module.scss';
 import { useEffect, useState } from 'react';
 
-const ImgSlider = ({ elements, handleAddingElements, handleDeletingElement }) => {
+const ImgSlider = ({ elements, handleAddingElements, handleDeletingElement}) => {
 
     const WidthWindow = 350;
     const [Offset, setOffset] = useState(elements.length > 2 ? -350 : 0);
     const [CurrentIndex, setCurrentIndex] = useState(0);
     const [ValueInputFile, setValueInputFile] = useState(null);
     const [UrlFile, setUrlFile] = useState(null);
+    const [HoverLabel, setHoverLabel] = useState(false);
 
     const handleValueInputFile = (e) => {
         const file = e.target.files[0];
@@ -15,6 +16,10 @@ const ImgSlider = ({ elements, handleAddingElements, handleDeletingElement }) =>
             setValueInputFile(file);
             const url = URL.createObjectURL(file);
             setUrlFile(url);
+            if (elements.length > 1) {
+                setOffset((elements.length) * -WidthWindow);
+            }
+            else { setOffset(-350) };
         };
     };
 
@@ -25,6 +30,31 @@ const ImgSlider = ({ elements, handleAddingElements, handleDeletingElement }) =>
         }
         else {
             { direction ? setOffset(0) : setOffset((elements.length - 1) * -WidthWindow) };
+        };
+    };
+
+    const handleDragOver = (e) => {
+        e.preventDefault();
+        setHoverLabel(true);
+    };
+
+    const handleDragLeave = (e) => {
+        e.preventDefault();
+        setHoverLabel(false)
+    };
+
+    const handleDrop = (e) => {
+        e.preventDefault();
+        setHoverLabel(false);
+        const file = e.dataTransfer.files[0];
+        if (file) {
+            setValueInputFile(file);
+            const url = URL.createObjectURL(file);
+            setUrlFile(url);
+            if (elements.length > 1) {
+                setOffset((elements.length) * -WidthWindow);
+            }
+            else { setOffset(-350) };
         };
     };
 
@@ -61,19 +91,29 @@ const ImgSlider = ({ elements, handleAddingElements, handleDeletingElement }) =>
                                     opacity: `${CurrentIndex !== i ? '0.5' : '1'}`,
                                     backgroundImage: `URL(${el})`,
                                     backgroundSize: 'cover',
+                                    borderColor: `${HoverLabel ? 'aqua' : 'rgb(212, 0, 255)'}`
                                 }}
                             >
                                 {el === '+' ? (
                                     <>
-                                        <label htmlFor="edding-img">
-                                            <input type="file" id='edding-img' onChange={handleValueInputFile} />
-                                            <span>Нажмите чтобы добавить или перетащите в это поле</span>
+                                        <label htmlFor="edding-img" onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={handleDrop}>
+                                            <input type="file" id='edding-img' onChange={handleValueInputFile} accept="image/*" />
+                                            <span>Нажмите или перетащите чтобы добавить изображение</span>
                                         </label>
                                     </>
                                 ) : (
                                     <>{elements.includes('+') ? (
                                         <>
-                                            <button className={style.page__button} onClick={() => { handleDeletingElement(i); setUrlFile(null) }}>del</button>
+                                            <button
+                                                className={style.page__button}
+                                                onClick={() => {
+                                                    handleDeletingElement(i);
+                                                    setUrlFile(null); 
+                                                    setOffset((elements.length - 2) * -WidthWindow);
+                                                }}
+                                            >
+                                                del
+                                            </button>
                                             <button className={style.page__button}>edit</button>
                                         </>
                                     ) : (

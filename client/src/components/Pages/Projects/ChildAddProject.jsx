@@ -19,11 +19,16 @@ const ChildAddProject = ({ setAddingNewProject }) => {
 
     useEffect(() => {
         console.log(ArrayFiles);
+        console.log(ArrayElements);
     }, [ArrayElements, ArrayFiles])
-    
+
     return (
         <div className={style.projects__adding_project}>
-            <ImgSlider elements={ArrayElements} handleAddingElements={handleAddingElements} handleDeletingElement={handleDeletingElement}/>
+            <ImgSlider
+                elements={ArrayElements}
+                handleAddingElements={handleAddingElements}
+                handleDeletingElement={handleDeletingElement}
+            />
             <div className={style.adding_project__box_inputs}>
                 <input className={`${style.box_input__input} ${style.adding_project__input}`} type="text" placeholder='name ru' />
                 <input className={`${style.box_input__input} ${style.adding_project__input}`} type="text" placeholder='name' />
