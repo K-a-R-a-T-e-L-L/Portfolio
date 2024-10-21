@@ -1,8 +1,11 @@
 const express = require('express');
+const multer = require('multer');
+const path = require('path');
 const app = express();
 const cors = require('cors');
 const port = 4000;
 const dotenv = require('dotenv');
+const { log } = require('console');
 dotenv.config();
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('database.db');
@@ -14,11 +17,27 @@ const db = new sqlite3.Database('database.db');
 app.use(express.json());
 app.use(cors());
 
-app.get('/adding', async (req, res) => {
-    const data = req.body;
+const StorageFiles = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, './uploads');
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname));
+    }
+});
+
+const upload = multer({storage: StorageFiles});
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+app.post('/adding', upload.array('img'), async (req, res) => {
+    const {name, name_ru, link, info, info_ru} = req.body;
+    const img = req.files;
+    const data = {name, name_ru, link, img, info, info_ru};
+    
     try {
         db.run('INSERT INTO projects_data (name, name_ru, link, img, info, info_ru) VALUES(?, ?, ?, ?, ?, ?);',
-            [data.name, data.name_ru, data.link, data.img, data.info, data.info_ru], function (err) {
+            [data.name, data.name_ru, data.link, JSON.stringify(data.img), data.info, data.info_ru], function (err) {
                 if (err) {
                     console.log(`Error writing data: ${err}`);
                     res.send(`Error writing data: ${err}`);
@@ -31,7 +50,7 @@ app.get('/adding', async (req, res) => {
             }
             else {
                 res.send(rows);
-                console.log(rows);
+                console.table(rows);
             }
         })
     }
