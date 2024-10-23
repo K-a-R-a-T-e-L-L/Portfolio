@@ -28,8 +28,6 @@ const ChildAddProject = ({ setAddingNewProject }) => {
     };
 
     const handleSendingData = () => {
-        console.log(ArrayFiles);
-
         if (ArrayFiles.length > 0 && ValueInfoRuTextarea !== '' && ValueInfoTextarea !== '' && ValueLinkInput !== '' && ValueNameInput !== '' && ValueNameRuInput !== '') {
             const data = new FormData();
             data.append('name', ValueNameInput);
@@ -52,11 +50,6 @@ const ChildAddProject = ({ setAddingNewProject }) => {
             alert('Заполните все поля')
         }
     };
-
-    useEffect(() => {
-        console.log(ArrayFiles);
-        console.log(ArrayElements);
-    }, [ArrayElements, ArrayFiles])
 
     return (
         <div className={style.projects__adding_project}>

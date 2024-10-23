@@ -34,7 +34,6 @@
             min-width: 100%;
             min-height: 100%;
             font-size: 60px;
-            border: 1px dashed rgb(212, 0, 255);
             border-radius: 10px;
             background-color: rgb(0, 0, 0);
             display: flex;
@@ -65,7 +64,20 @@
             }
 
             .page__button {
+                width: 30px;
+                height: 30px;
+                border-radius: 100%;
+                background-image: url('../../../images/delete.png');
+                background-size: contain;
                 background-color: black;
+                border: 1px solid red;
+                &:hover{
+                    opacity: 0.8;;
+                }
+                &:active{
+                    opacity: 1;
+                    transform: translateY(-1px);
+                }
             }
         }
     }

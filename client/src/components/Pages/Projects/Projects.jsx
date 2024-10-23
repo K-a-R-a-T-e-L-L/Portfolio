@@ -33,10 +33,9 @@ const Projects = () => {
                     img: JSON.parse(el.img)
                 }));
                 setDataProjectsArray(data);
-                console.log(data);
             })
             .catch((err) => { console.log(`Error receiving data from the server: ${err}`) });
-    }, []);
+    }, [AddingNewProject]);
 
     return (
         <>
@@ -51,8 +50,11 @@ const Projects = () => {
                                     {DataProjectsArray.map((el, i) => {
                                         return (
                                             <div className={style.box__project} key={i} onClick={() => { setMoreDataProject(el) }}>
-                                                <div className={style.project__img} style={{ backgroundImage: `URL(http://localhost:4000/${el.img[0].destination}/${el.img[0].filename})` }}
-                                                    onClick={() => { console.log(`URL(${el.img[0].path})`) }}></div>
+                                                <div
+                                                    className={style.project__img}
+                                                    style={{ backgroundImage: `URL(http://localhost:4000/${el.img[0].destination}/${el.img[0].filename})` }}
+                                                >
+                                                </div>
                                                 <div className={style.project__info}>
                                                     <h5>{DisplayButton === 'en' ? el.name : el.name_ru}</h5>
                                                     <h6>{DisplayButton === 'en' ? el.info : el.info_ru}</h6>
