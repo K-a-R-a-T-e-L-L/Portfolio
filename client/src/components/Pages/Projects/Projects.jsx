@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import LanguageChangeButtons from '../../Reused/LanguageChangeButtons/LanguageChangeButtons';
 import BackButton from '../../Reused/BackButton/BackButton';
 import axios from 'axios';
-import ChildMoreData from './ChildMoreData';
+import ChildMoreData from './ChildMoreData/ChildMoreData';
 import ChildAddProject from './ChildAddProject';
 
 const Projects = () => {
@@ -35,7 +35,7 @@ const Projects = () => {
                 setDataProjectsArray(data);
             })
             .catch((err) => { console.log(`Error receiving data from the server: ${err}`) });
-    }, [AddingNewProject]);
+    }, [AddingNewProject, MoreDataProject]);
 
     return (
         <>
