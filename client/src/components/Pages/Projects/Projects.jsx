@@ -6,9 +6,12 @@ import LanguageChangeButtons from '../../Reused/LanguageChangeButtons/LanguageCh
 import BackButton from '../../Reused/BackButton/BackButton';
 import axios from 'axios';
 import ChildMoreData from './ChildMoreData/ChildMoreData';
-import ChildAddProject from './ChildAddProject';
+import ChildAddProject from './ChildAddProject/ChildAddProject';
 
 const Projects = () => {
+
+    const URLProjects = process.env.REACT_APP_URL_PROJECTS;
+    const URLServer = process.env.REACT_APP_URL_SERVER;    
 
     const [DataProjectsArray, setDataProjectsArray] = useState([]);
     const [MoreDataProject, setMoreDataProject] = useState();
@@ -26,7 +29,7 @@ const Projects = () => {
     }, []);
 
     useEffect(() => {
-        axios.get('http://localhost:4000/projects')
+        axios.get(`${URLProjects}`)
             .then((res) => {
                 const data = res.data.map(el => ({
                     ...el,
@@ -34,7 +37,11 @@ const Projects = () => {
                 }));
                 setDataProjectsArray(data);
             })
-            .catch((err) => { console.log(`Error receiving data from the server: ${err}`) });
+            .catch((err) => {
+                const ErrorMessage = err.response ?
+                    `Ошибка на серевере ${JSON.stringify(err.response.data)}` : err.request ? `Ответ от сервера не был получен` : `Произошла ошибка ${err.message}`
+                console.log(ErrorMessage);
+            });
     }, [AddingNewProject, MoreDataProject]);
 
     return (
@@ -52,7 +59,7 @@ const Projects = () => {
                                             <div className={style.box__project} key={i} onClick={() => { setMoreDataProject(el) }}>
                                                 <div
                                                     className={style.project__img}
-                                                    style={{ backgroundImage: `URL(http://localhost:4000/${el.img[0].destination}/${el.img[0].filename})` }}
+                                                    style={{ backgroundImage: `URL(${URLServer}/${el.img[0].destination}/${el.img[0].filename})` }}
                                                 >
                                                 </div>
                                                 <div className={style.project__info}>

@@ -1,6 +1,8 @@
 import style from './styles.module.scss';
 import { useEffect, useState } from 'react';
 import { handleValueInputFile, handleSlideSideways, handleDragOver, handleDragLeave, handleDrop } from './sliderHandlers';
+import { useTranslation } from 'react-i18next';
+import { useLocalStorage } from '../../../hooks/useLocalStorage/useLocalStorage';
 
 const ImgSlider = ({ elements, handleAddingElements, handleDeletingElement }) => {
 
@@ -10,6 +12,17 @@ const ImgSlider = ({ elements, handleAddingElements, handleDeletingElement }) =>
     const [ValueInputFile, setValueInputFile] = useState(null);
     const [UrlFile, setUrlFile] = useState(null);
     const [HoverLabel, setHoverLabel] = useState(false);
+    const { i18n, t } = useTranslation();
+    const [DisplayButton, setDisplayButton] = useLocalStorage('page-language', 'ru');
+
+    const changeLanguage = (language) => {
+        i18n.changeLanguage(language);
+        setDisplayButton(language);
+    };
+
+    useEffect(() => {
+        changeLanguage(DisplayButton);
+    }, []);
 
     useEffect(() => {
         if (UrlFile) {
@@ -62,7 +75,7 @@ const ImgSlider = ({ elements, handleAddingElements, handleDeletingElement }) =>
                                                 onChange={(e) => handleValueInputFile(e, setValueInputFile, setUrlFile, setOffset, elements, WidthWindow)}
                                                 accept="image/*"
                                             />
-                                            <span>Нажмите или перетащите чтобы добавить изображение</span>
+                                            <span>{t("slider.titleAdding")}</span>
                                         </label>
                                     </>
                                 ) : (

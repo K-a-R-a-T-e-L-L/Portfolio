@@ -7,18 +7,13 @@ router.get('/projects', async (req, res) => {
     try {
         db.all('SELECT * FROM projects_data;', (err, rows) => {
             if (err) {
-                console.log(`Error when receiving project data: ${err}`);
-                res.send(`Error when receiving project data: ${err}`);
+                res.status(500).send(err);
             }
-            else {
-                res.send(rows);
-                console.log('good');
-            }
+                res.status(200).send(rows);
         })
     }
     catch (err) {
-        console.log(`Server error while receiving data: ${err}`);
-        res.send(`Server error while receiving data: ${err}`);
+        res.status(500).send(err);
     };
 });
 

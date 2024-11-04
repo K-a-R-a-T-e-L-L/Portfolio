@@ -1,15 +1,44 @@
 {
-    "name": "Sukhorukov Kirill",
-    "status": "Junior frontend developer",
-    "aboutButton": "About me",
-    "contactsButton": "Contacts",
-    "projectsButton": "Projects",
-    "skillsButton": "Skills",
-    "backButton": "< Back",
-    "phrase": "«Find a case you like, and you won't have to work a single day in your life. — Confucius.»",
-    "contact": "Ways to contact me:",
-    "hello": "Greetings!",
-    "miniInfo": "My name is Kirill, I am a novice frontend developer who always strives for self-improvement in this field.",
-    "purpose": "My initial goal is to become a senior fullstack developer.",
-    "certificate": "- Certificate of completion of the JavaScript developer course"
+    "homePage": {
+        "name": "Sukhorukov Kirill",
+        "status": "Junior frontend developer",
+        "about": "About me",
+        "contacts": "Contacts",
+        "projects": "Projects",
+        "skills": "Skills"
+    },
+    "contactsPage": {
+        "message": "Ways to contact me:"
+    },
+    "aboutPage": {
+        "phrase": "«Find a case you like, and you won't have to work a single day in your life. — Confucius.»",
+        "hello": "Greetings!",
+        "miniInfo": "My name is Kirill, I am a novice frontend developer who always strives for self-improvement in this field.",
+        "purpose": "My initial goal is to become a senior fullstack developer.",
+        "certificate": "- Certificate of completion of the JavaScript developer course"
+    },
+    "projectsPage": {
+        "adding": {
+            "nameRu": "Russian name",
+            "nameEn": "English name",
+            "infoRu": "Information in Russian",
+            "infoEn": "Information in English",
+            "cancel": "Cancel",
+            "save": "Save",
+            "link": "Link"
+        },
+        "more": {
+            "titleLink": "Link to the project:",
+            "deletingBlock": {
+                "title": "Deleting a project",
+                "info": "In order to confirm the deletion of the project, confirm that you are its creator:",
+                "cancel": "Cancel",
+                "delete": "Delete"
+            }
+        }
+    },
+    "slider": {
+        "titleAdding": "Click or drag to add an image"
+    },
+    "backButton": "< Back"
 }

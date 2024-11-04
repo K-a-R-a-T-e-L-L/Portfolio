@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react';
-import ImgSlider from '../../Reused/ImgSlider/ImgSlider';
+import ImgSlider from '../../../Reused/ImgSlider/ImgSlider';
 import style from './styles.module.scss';
 import axios from 'axios';
+import { useLocalStorage } from '../../../../hooks/useLocalStorage/useLocalStorage';
+import { useTranslation } from 'react-i18next';
 
 const ChildAddProject = ({ setAddingNewProject }) => {
+
+    const URLAddingProject = process.env.REACT_APP_URL_ADDING_PROJECT;
 
     const [ArrayElements, setArrayElements] = useState(['+']);
     const [ArrayFiles, setArrayFiles] = useState([]);
@@ -12,6 +16,14 @@ const ChildAddProject = ({ setAddingNewProject }) => {
     const [ValueInfoTextarea, setValueInfoTextarea] = useState("");
     const [ValueInfoRuTextarea, setValueInfoRuTextarea] = useState("");
     const [ValueLinkInput, setValueLinkInput] = useState("");
+    const [Valid, setValid] = useState(false);
+    const { i18n, t } = useTranslation();
+    const [DisplayButton, setDisplayButton] = useLocalStorage('page-language', 'ru');
+
+    const changeLanguage = (language) => {
+        i18n.changeLanguage(language);
+        setDisplayButton(language);
+    };
 
     const handleAddingElements = (url, file) => {
         setArrayElements((value) => [...value, url]);
@@ -38,21 +50,32 @@ const ChildAddProject = ({ setAddingNewProject }) => {
             });
             data.append('info', ValueInfoTextarea);
             data.append('info_ru', ValueInfoRuTextarea);
+            setValid(false);
 
-            axios.post('http://localhost:4000/adding', data)
+            axios.post(`${URLAddingProject}`, data)
                 .then((res) => {
-                    console.log(res.data);
                     setAddingNewProject(false)
                 })
-                .catch((err) => console.log(err));
+                .catch((err) => {
+                    const ErrorMessage = err.response ?
+                        `Ошибка на серевере ${JSON.stringify(err.response.data)}` : err.request ? `Ответ от сервера не был получен` : `Произошла ошибка ${err.message}`
+                    console.log(ErrorMessage);
+                });
         }
         else {
-            alert('Заполните все поля')
-        }
+            setValid(!Valid);
+        };
     };
+
+    useEffect(() => {
+        changeLanguage(DisplayButton);
+    }, []);
 
     return (
         <div className={style.projects__adding_project}>
+            {Valid && (
+                <><div className={style.adding_project__message_error}>Добавьте файл и заполните все поля!!!</div></>
+            )}
             <ImgSlider
                 elements={ArrayElements}
                 handleAddingElements={handleAddingElements}
@@ -64,14 +87,14 @@ const ChildAddProject = ({ setAddingNewProject }) => {
                     onChange={(e) => handleValue(e, setValueNameRuInput)}
                     className={`${style.box_input__input} ${style.adding_project__input}`}
                     type="text"
-                    placeholder='Russian name'
+                    placeholder={t("projectsPage.adding.nameRu")}
                 />
                 <input
                     value={ValueNameInput}
                     onChange={(e) => handleValue(e, setValueNameInput)}
                     className={`${style.box_input__input} ${style.adding_project__input}`}
                     type="text"
-                    placeholder='English name'
+                    placeholder={t("projectsPage.adding.nameEn")}
                 />
             </div>
             <div className={style.adding_project__box_textareas}>
@@ -81,7 +104,7 @@ const ChildAddProject = ({ setAddingNewProject }) => {
                     className={style.box_textarea__textarea}
                     name=""
                     id=""
-                    placeholder='Information in Russian'
+                    placeholder={t("projectsPage.adding.infoRu")}
                 ></textarea>
                 <textarea
                     value={ValueInfoTextarea}
@@ -89,7 +112,7 @@ const ChildAddProject = ({ setAddingNewProject }) => {
                     className={style.box_textarea__textarea}
                     name=""
                     id=""
-                    placeholder='Information in English'
+                    placeholder={t("projectsPage.adding.infoEn")}
                 ></textarea>
             </div>
             <input
@@ -97,11 +120,13 @@ const ChildAddProject = ({ setAddingNewProject }) => {
                 onChange={(e) => handleValue(e, setValueLinkInput)}
                 className={`${style.adding_project__input} ${style.adding_project__input_link}`}
                 type="text"
-                placeholder='Link'
+                placeholder={t("projectsPage.adding.link")}
             />
             <div className={style.adding_project__box_buttons}>
-                <button className={style.box_buttons__button} onClick={() => { setAddingNewProject(false) }}>Отмена</button>
-                <button className={style.box_buttons__button} onClick={handleSendingData}>Сохранить</button>
+                <button className={style.box_buttons__button} onClick={() => { setAddingNewProject(false) }}>{t("projectsPage.adding.cancel")}</button>
+                <button className={style.box_buttons__button} onClick={handleSendingData} style={Valid ? { borderColor: 'rgba(255, 0, 0, 0.521)' } : null}>
+                    {t("projectsPage.adding.save")}
+                </button>
             </div>
         </div>
     );

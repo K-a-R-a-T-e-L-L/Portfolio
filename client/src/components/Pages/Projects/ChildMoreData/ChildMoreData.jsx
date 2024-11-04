@@ -1,28 +1,37 @@
 import axios from 'axios';
 import ImgSlider from '../../../Reused/ImgSlider/ImgSlider';
-import style from './stylesMore.module.scss';
-import { useState } from 'react';
+import style from './styles.module.scss';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useLocalStorage } from '../../../../hooks/useLocalStorage/useLocalStorage';
 
 const ChildMoreData = ({ DisplayButton, MoreDataProject, setMoreDataProject }) => {
+
+    const URLDeletingProject = process.env.REACT_APP_URL_DELETING_PROJECT
 
     const [DeleteProject, setDeleteProject] = useState(false);
     const [ValueInputOne, setValueInputOne] = useState('');
     const [ValueInputTwo, setValueInputTwo] = useState('');
+    const { t } = useTranslation();
 
     const handleValueInputs = (e, set) => {
         set(e.target.value);
     };
 
     const handleDeleteProject = () => {
-        const data = {idProject: DeleteProject, oneValue: ValueInputOne, twoValue: ValueInputTwo};        
-        axios.post('http://localhost:4000/delete', data)
-            .then((res) => { 
-                if(res.data === true){
+        const data = { idProject: DeleteProject, oneValue: ValueInputOne, twoValue: ValueInputTwo };
+        axios.post(`${URLDeletingProject}`, data)
+            .then((res) => {
+                if (res.data === true) {
                     setMoreDataProject();
                     setDeleteProject(false);
                 }
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                const ErrorMessage = err.response ?
+                    `Ошибка на серевере ${JSON.stringify(err.response.data)}` : err.request ? `Ответ от сервера не был получен` : `Произошла ошибка ${err.message}`
+                console.log(ErrorMessage);
+            });
     };
 
     return (
@@ -34,14 +43,14 @@ const ChildMoreData = ({ DisplayButton, MoreDataProject, setMoreDataProject }) =
                     <ImgSlider elements={MoreDataProject.img} />
                     <p className={style.more_data__info}>{DisplayButton === 'en' ? MoreDataProject.info : MoreDataProject.info_ru}</p>
                     <span className={style.more_data__link}>
-                        Ссылка на проект:&ensp;<a href={MoreDataProject.link} target="_blank" rel="noopener noreferrer">{MoreDataProject.link}</a>
+                        {t("projectsPage.more.titleLink")}&ensp;<a href={MoreDataProject.link} target="_blank" rel="noopener noreferrer">{MoreDataProject.link}</a>
                     </span>
                     <button className={style.more_data__delete} onClick={() => setDeleteProject(MoreDataProject.id)}></button>
                 </>
             ) : (
                 <>
-                    <h4 className={style.more_data__delete_project}>Удаление проекта</h4>
-                    <h6 className={style.more_data__confirmation_deletion}>Для того чтобы подвердить удаление проекта, подтвердите что вы являетесь его создателем:</h6>
+                    <h4 className={style.more_data__delete_project}>{t("projectsPage.more.deletingBlock.title")}</h4>
+                    <h6 className={style.more_data__confirmation_deletion}>{t("projectsPage.more.deletingBlock.info")}</h6>
                     <div className={style.more_data__box_inputs}>
                         <input
                             className={style.box_inputs__input}
@@ -57,8 +66,8 @@ const ChildMoreData = ({ DisplayButton, MoreDataProject, setMoreDataProject }) =
                         />
                     </div>
                     <div className={style.more_data__box_buttons}>
-                        <button className={style.box_buttons__button} onClick={() => setDeleteProject(false)}>Отмена</button>
-                        <button className={style.box_buttons__button} onClick={handleDeleteProject}>Удалить</button>
+                        <button className={style.box_buttons__button} onClick={() => setDeleteProject(false)}>{t("projectsPage.more.deletingBlock.cancel")}</button>
+                        <button className={style.box_buttons__button} onClick={handleDeleteProject}>{t("projectsPage.more.deletingBlock.delete")}</button>
                     </div>
                 </>
             )}

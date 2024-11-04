@@ -26,7 +26,7 @@ const Contacts = () => {
                 <LanguageChangeButtons DisplayButton={DisplayButton} setDisplayButton={setDisplayButton} left={'30px'} />
                 <BackButton pathBack={'/'} />
                 <div className={style.contacts__box}>
-                    <h5>{t("contact")}</h5>
+                    <h5>{t("contactsPage.message")}</h5>
                     <div>
                         <a href="https://t.me/K_a_R_a_T_e_L_L" target="_blank" rel="noopener noreferrer">
                             <img src={ImgLogo.tg} alt="Logo" />

@@ -63,8 +63,8 @@ const Home = () => {
                 <div className={style.main__avatar}>
                     <LazyLoadImage className={style.main__avatar} src={Ava} placeholderSrc={AvaPreview} alt='Avatar' />
                 </div>
-                <h1 className={style.main__name}>{t("name")}</h1>
-                <h4 className={style.main__status}>{t("status")}</h4>
+                <h1 className={style.main__name}>{t("homePage.name")}</h1>
+                <h4 className={style.main__status}>{t("homePage.status")}</h4>
                 <h2 className={style.main__phrases}>
                     {Loading ? (
                         <>
@@ -79,10 +79,10 @@ const Home = () => {
                     )}
                 </h2>
                 <div className={style.main__menu}>
-                    <button className={style.menu__button} onClick={() => handleRoutePath('./about')}>{t("aboutButton")}</button>
-                    <button className={style.menu__button} onClick={() => handleRoutePath('./contacts')}>{t("contactsButton")}</button>
-                    <button className={style.menu__button} onClick={() => handleRoutePath('./projects')}>{t("projectsButton")}</button>
-                    <button className={style.menu__button} onClick={() => handleRoutePath('./skills')}>{t("skillsButton")}</button>
+                    <button className={style.menu__button} onClick={() => handleRoutePath('./about')}>{t("homePage.about")}</button>
+                    <button className={style.menu__button} onClick={() => handleRoutePath('./contacts')}>{t("homePage.contacts")}</button>
+                    <button className={style.menu__button} onClick={() => handleRoutePath('./projects')}>{t("homePage.projects")}</button>
+                    <button className={style.menu__button} onClick={() => handleRoutePath('./skills')}>{t("homePage.skills")}</button>
                 </div>
             </main>
         </div>
