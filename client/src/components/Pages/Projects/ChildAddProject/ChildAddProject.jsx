@@ -85,14 +85,14 @@ const ChildAddProject = ({ setAddingNewProject }) => {
                 <input
                     value={ValueNameRuInput}
                     onChange={(e) => handleValue(e, setValueNameRuInput)}
-                    className={`${style.box_input__input} ${style.adding_project__input}`}
+                    className={style.adding_project__input}
                     type="text"
                     placeholder={t("projectsPage.adding.nameRu")}
                 />
                 <input
                     value={ValueNameInput}
                     onChange={(e) => handleValue(e, setValueNameInput)}
-                    className={`${style.box_input__input} ${style.adding_project__input}`}
+                    className={style.adding_project__input}
                     type="text"
                     placeholder={t("projectsPage.adding.nameEn")}
                 />

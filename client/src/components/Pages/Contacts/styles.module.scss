@@ -60,3 +60,17 @@
         }
     }
 }
+
+@media (width < 400px) {
+    .contacts__box{
+        a{
+            width: 150px !important;
+            grid-template-columns: 60px 30px !important;
+            font-size: 13px !important;
+            img{
+                width: 20px !important;
+                height: 20px !important;
+            }
+        }
+    }
+}

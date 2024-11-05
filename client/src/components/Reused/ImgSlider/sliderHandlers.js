@@ -7,7 +7,7 @@ export const handleValueInputFile = (e, setValueInputFile, setUrlFile, setOffset
         if (elements.length > 1) {
             setOffset((elements.length) * -WidthWindow);
         }
-        else { setOffset(-350) };
+        else { setOffset(-WidthWindow) };
     };
 };
 
@@ -42,6 +42,6 @@ export const handleDrop = (e, setHoverLabel, setValueInputFile, setUrlFile, elem
         if (elements.length > 1) {
             setOffset((elements.length) * -WidthWindow);
         }
-        else { setOffset(-350) };
+        else { setOffset(-WidthWindow) };
     };
 };

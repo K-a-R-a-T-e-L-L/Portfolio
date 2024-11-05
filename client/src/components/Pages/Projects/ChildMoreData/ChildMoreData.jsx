@@ -1,9 +1,8 @@
 import axios from 'axios';
 import ImgSlider from '../../../Reused/ImgSlider/ImgSlider';
 import style from './styles.module.scss';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLocalStorage } from '../../../../hooks/useLocalStorage/useLocalStorage';
 
 const ChildMoreData = ({ DisplayButton, MoreDataProject, setMoreDataProject }) => {
 

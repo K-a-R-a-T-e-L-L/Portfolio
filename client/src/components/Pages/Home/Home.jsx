@@ -20,6 +20,7 @@ const Home = () => {
     const [Loading, setLoading] = useState(true);
     const [DisplayButton, setDisplayButton] = useLocalStorage('page-language', 'ru');
     const [TranslationError, setTranslationError] = useState(null);
+    const [WidthWindow, setWidthWindow] = useState(null);
 
     const handleRoutePath = (path) => {
         Navigate(path);
@@ -29,6 +30,17 @@ const Home = () => {
         i18n.changeLanguage(language);
         setDisplayButton(language);
     };
+
+    useEffect(() => {
+        const handleWidthWindow = () => {
+            setWidthWindow(window.innerWidth < 800 ? (window.innerWidth < 400 ? '25px' : '50px') : '100px');
+        };
+        handleWidthWindow();
+        window.addEventListener('resize', handleWidthWindow);
+        return () => {
+            window.removeEventListener('resize', handleWidthWindow);
+        };
+    }, []);
 
     useEffect(() => {
         handleGettingRandomPhrase({ setTranslationError, setPhrase, DisplayButton, setLoading, t });
@@ -59,7 +71,7 @@ const Home = () => {
     return (
         <div className={style.app}>
             <main className={style.app__main}>
-                <LanguageChangeButtons DisplayButton={DisplayButton} setDisplayButton={setDisplayButton} left={'100px'} />
+                <LanguageChangeButtons DisplayButton={DisplayButton} setDisplayButton={setDisplayButton} left={WidthWindow} />
                 <div className={style.main__avatar}>
                     <LazyLoadImage className={style.main__avatar} src={Ava} placeholderSrc={AvaPreview} alt='Avatar' />
                 </div>

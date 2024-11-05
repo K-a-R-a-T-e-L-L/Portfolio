@@ -6,19 +6,36 @@ import { useLocalStorage } from '../../../hooks/useLocalStorage/useLocalStorage'
 
 const ImgSlider = ({ elements, handleAddingElements, handleDeletingElement }) => {
 
-    const WidthWindow = 350;
-    const [Offset, setOffset] = useState(elements.length > 2 ? -350 : 0);
+    const [WidthWindow, setWidthWindow] = useState(null);
+    const [Offset, setOffset] = useState(elements.length > 2 ?
+        (window.innerWidth < 900 ? (window.innerWidth < 400 ? -125 : (window.innerWidth < 700 ? -175 : -250)) : -350) : 0);
     const [CurrentIndex, setCurrentIndex] = useState(0);
     const [ValueInputFile, setValueInputFile] = useState(null);
     const [UrlFile, setUrlFile] = useState(null);
     const [HoverLabel, setHoverLabel] = useState(false);
     const { i18n, t } = useTranslation();
     const [DisplayButton, setDisplayButton] = useLocalStorage('page-language', 'ru');
+    const URLServer = process.env.REACT_APP_URL_SERVER;
 
     const changeLanguage = (language) => {
         i18n.changeLanguage(language);
         setDisplayButton(language);
     };
+
+    useEffect(() => {
+        const handleWidthWindow = () => {
+            setWidthWindow(window.innerWidth < 900 ? (window.innerWidth < 400 ? 125 : (window.innerWidth < 700 ? 175 : 250)) : 350);
+        };
+        handleWidthWindow();
+        window.addEventListener('resize', handleWidthWindow);
+        return () => {
+            window.removeEventListener('resize', handleWidthWindow);
+        };
+    }, []);
+
+    useEffect(() => {
+        setOffset(elements.length > 2 ? (window.innerWidth < 900 ? (window.innerWidth < 400 ? -125 : (window.innerWidth < 700 ? -175 : -250)) : -350) : 0);
+    }, [WidthWindow]);
 
     useEffect(() => {
         changeLanguage(DisplayButton);
@@ -40,7 +57,7 @@ const ImgSlider = ({ elements, handleAddingElements, handleDeletingElement }) =>
 
     useEffect(() => {
         setCurrentIndex(Math.abs(Offset) / WidthWindow);
-    }, [Offset]);
+    }, [Offset, WidthWindow]);
 
     return (
         <>
@@ -55,7 +72,7 @@ const ImgSlider = ({ elements, handleAddingElements, handleDeletingElement }) =>
                                 style={{
                                     transform: `translateX(${Offset}px) ${CurrentIndex !== i ? 'scale(0.80)' : ''}`,
                                     opacity: `${CurrentIndex !== i ? '0.5' : '1'}`,
-                                    backgroundImage: `URL(${typeof el === 'object' ? 'http://localhost:4000/' + el.destination + '/' + el.filename : el})`,
+                                    backgroundImage: `URL(${typeof el === 'object' ? `${URLServer}/${el.destination}/${el.filename}` : el})`,
                                     backgroundSize: 'cover',
                                     border: `1px ${typeof el === 'object' ? 'solid aqua' : 'dashed rgb(212, 0, 255)'}`,
                                     borderColor: `${HoverLabel ? 'aqua' : 'rgb(212, 0, 255)'}`
