@@ -1,0 +1,132 @@
+@mixin FormatText ($margin, $size, $weight) {
+    margin: $margin auto;
+    font-size: $size;
+    font-weight: $weight;
+    letter-spacing: 1px;
+    text-align: center;
+    max-width: 85%;
+    overflow: hidden;
+}
+
+.more_data__delete_project {
+    @include FormatText(60px, 25px, 600);
+}
+
+.more_data__confirmation_deletion {
+    @include FormatText(80px, 18px, 200);
+}
+
+.more_data__box_inputs {
+    margin-top: 80px;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+
+    .box_inputs__input {
+        width: 49.5%;
+        background-color: black;
+        border: 1px solid rgba(255, 0, 0, 0.32);
+        border-radius: 5px;
+        padding-left: 10px;
+        color: red;
+
+        &:focus {
+            outline: 1px solid red;
+        }
+    }
+}
+
+.more_data__box_buttons {
+    margin-top: 80px;
+    width: 100%;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    column-gap: 30px;
+
+    .box_buttons__button {
+        width: 30%;
+        border-radius: 5px;
+        background-color: rgba(255, 0, 0, 0.132);
+        border: 1px solid rgba(255, 0, 0, 0.499);
+        font-size: 18px;
+        letter-spacing: 2px;
+        opacity: 0.7;
+
+        &:hover {
+            opacity: 1;
+        }
+
+        &:active {
+            transform: translateY(-1px);
+        }
+
+        &:first-child {
+            background-color: rgba(255, 106, 0, 0.132);
+            border: 1px solid rgba(255, 106, 0, 0.499);
+        }
+    }
+}
+
+@media (width < 700px) {
+    .more_data__delete_project {
+        @include FormatText(40px, 20px !important, 600);
+    }
+
+    .more_data__confirmation_deletion {
+        @include FormatText(20px, 14px !important, 200);
+    }
+
+    .more_data__box_inputs {
+        margin-top: 40px;
+        width: 100%;
+        height: 30px;
+
+        .box_inputs__input {
+            font-size: 10px;
+        }
+    }
+
+    .more_data__box_buttons {
+        margin-top: 40px !important;
+
+        .box_buttons__button {
+            font-size: 12px !important;
+            height: 30px;
+        }
+    }
+}
+
+@media (width < 500px) {
+    .more_data__delete_project {
+        @include FormatText(40px, 16px !important, 600);
+    }
+
+    .more_data__confirmation_deletion {
+        @include FormatText(20px, 10px !important, 200);
+    }
+
+    .more_data__box_inputs {
+        height: 25px;
+
+        .box_inputs__input {
+            font-size: 8px;
+        }
+    }
+
+    .box_buttons__button {
+        font-size: 10px !important;
+        height: 25px !important;
+    }
+}
+
+@media (width < 400px) {
+    .more_data__box_inputs {
+        height: 25px;
+
+        .box_inputs__input {
+            font-size: 6px;
+        }
+    }
+}

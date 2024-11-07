@@ -1,8 +1,9 @@
 import axios from 'axios';
 import ImgSlider from '../../../Reused/ImgSlider/ImgSlider';
 import style from './styles.module.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import ChildDeleteProject from './ChildDeleteProject/ChildDeleteProject';
 
 const ChildMoreData = ({ DisplayButton, MoreDataProject, setMoreDataProject }) => {
 
@@ -11,6 +12,7 @@ const ChildMoreData = ({ DisplayButton, MoreDataProject, setMoreDataProject }) =
     const [DeleteProject, setDeleteProject] = useState(false);
     const [ValueInputOne, setValueInputOne] = useState('');
     const [ValueInputTwo, setValueInputTwo] = useState('');
+    const [WidthWindow, setWidthWindow] = useState(null);
     const { t } = useTranslation();
 
     const handleValueInputs = (e, set) => {
@@ -33,8 +35,15 @@ const ChildMoreData = ({ DisplayButton, MoreDataProject, setMoreDataProject }) =
             });
     };
 
+    useEffect(() => {
+        window.addEventListener('resize', () => {setWidthWindow(window.innerWidth)});
+        return () => {
+            window.removeEventListener('resize', () => {setWidthWindow(window.innerWidth)});
+        };
+    });
+
     return (
-        <div className={style.projects__more_data}>
+        <div className={style.projects__more_data} style={DeleteProject && WidthWindow < 700 ? {maxHeight: '400px'} : null}>
             <button className={style.more_data__close} onClick={() => { setMoreDataProject() }}>✕</button>
             {!DeleteProject ? (
                 <>
@@ -47,28 +56,15 @@ const ChildMoreData = ({ DisplayButton, MoreDataProject, setMoreDataProject }) =
                     <button className={style.more_data__delete} onClick={() => setDeleteProject(MoreDataProject.id)}></button>
                 </>
             ) : (
-                <>
-                    <h4 className={style.more_data__delete_project}>{t("projectsPage.more.deletingBlock.title")}</h4>
-                    <h6 className={style.more_data__confirmation_deletion}>{t("projectsPage.more.deletingBlock.info")}</h6>
-                    <div className={style.more_data__box_inputs}>
-                        <input
-                            className={style.box_inputs__input}
-                            type="text" placeholder='XXXXXXXXXXXXXXXX'
-                            value={ValueInputOne}
-                            onChange={(e) => handleValueInputs(e, setValueInputOne)}
-                        />
-                        <input
-                            className={style.box_inputs__input}
-                            type="password" placeholder='XXXXXXXXXXXXXXXX'
-                            value={ValueInputTwo}
-                            onChange={(e) => handleValueInputs(e, setValueInputTwo)}
-                        />
-                    </div>
-                    <div className={style.more_data__box_buttons}>
-                        <button className={style.box_buttons__button} onClick={() => setDeleteProject(false)}>{t("projectsPage.more.deletingBlock.cancel")}</button>
-                        <button className={style.box_buttons__button} onClick={handleDeleteProject}>{t("projectsPage.more.deletingBlock.delete")}</button>
-                    </div>
-                </>
+                <ChildDeleteProject
+                    ValueInputOne={ValueInputOne}
+                    ValueInputTwo={ValueInputTwo}
+                    setValueInputOne={setValueInputOne}
+                    setValueInputTwo={setValueInputTwo}
+                    handleValueInputs={handleValueInputs}
+                    handleDeleteProject={handleDeleteProject}
+                    setDeleteProject={setDeleteProject}
+                />
             )}
         </div>
     );

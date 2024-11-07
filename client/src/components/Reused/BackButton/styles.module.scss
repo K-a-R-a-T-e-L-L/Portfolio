@@ -28,3 +28,10 @@
         top: 70px !important;
     }
 }
+
+@media (width < 400px) {
+    .back {
+        top: 35px !important;
+        left: 10px !important;
+    }
+}
