@@ -38,7 +38,7 @@ export const handleGettingRandomPhrase = async ({ setTranslationError, setPhrase
         }
         catch (err) {
             setTranslationError(null);
-            setPhrase(t('phrase'));
+            setPhrase(t('homePage.phrase'));
             console.log(`Ошибка при получении случайно фразы: ${err}`);
         }
     }

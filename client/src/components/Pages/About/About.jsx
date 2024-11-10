@@ -28,14 +28,23 @@ const About = () => {
                 <LanguageChangeButtons DisplayButton={DisplayButton} setDisplayButton={setDisplayButton} left={'30px'} />
                 <BackButton pathBack={'/'} />
                 <div className={style.about__box}>
-                    <h2>{t('aboutPage.hello')}</h2>
-                    <h3>{t('aboutPage.miniInfo')}</h3>
-                    <h4>{t('aboutPage.purpose')}</h4>
+                    <div className={style.box__text}>
+                        <h1 className={style.text__title}>{t('aboutPage.hello')}</h1>
+                        <p className={style.text__info}>{t('aboutPage.miniInfo')}</p>
+                        <h2 className={style.text__goal}>{t('aboutPage.purpose')}</h2>
+                    </div>
+                    <div className={style.about__certificate}>
+                        <figure>
+                            <LazyLoadImage
+                                src={CertificateImg}
+                                placeholderSrc={CertificatePreviewImg}
+                                alt="Сертификат о прохождении курса"
+                                className={style.certificateImg}
+                            />
+                            <figcaption>{t('aboutPage.certificate')}</figcaption>
+                        </figure>
+                    </div>
                 </div>
-                <figure>
-                <LazyLoadImage className={style.about__img} src={CertificateImg} placeholderSrc={CertificatePreviewImg} alt='Certificate' title='Certificate image'/>
-                    <figcaption>{t('aboutPage.certificate')}</figcaption>
-                </figure>
             </div>
         </>
     );

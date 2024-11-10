@@ -1,5 +1,6 @@
 {
     "homePage": {
+        "phrase": "«Find a case you like, and you won't have to work a single day in your life. — Confucius.»",
         "name": "Sukhorukov Kirill",
         "status": "Junior frontend developer",
         "about": "About me",
@@ -11,7 +12,6 @@
         "message": "Ways to contact me:"
     },
     "aboutPage": {
-        "phrase": "«Find a case you like, and you won't have to work a single day in your life. — Confucius.»",
         "hello": "Greetings!",
         "miniInfo": "My name is Kirill, I am a novice frontend developer who always strives for self-improvement in this field.",
         "purpose": "My initial goal is to become a senior fullstack developer.",

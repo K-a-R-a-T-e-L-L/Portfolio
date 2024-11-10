@@ -1,71 +1,89 @@
 .about {
+    position: absolute;
+    min-height: 100%;
+    width: 100%;
+    background-color: #121212;
+    color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     display: flex;
-    align-items: center;
-    flex-direction: column;
+    justify-content: center;
 
-    .about__box {
-        width: 60%;
-        position: relative;
-        top: 40px;
+    .box__text {
+        width: 66%;
+        margin: auto;
+
+        .text__title {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+
+        .text__info {
+            font-size: 1em;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .text__goal {
+            font-size: 1.5em;
+            margin: 20px 0 10px;
+            color: #ffd700;
+        }
+    }
+
+    .about__certificate {
         display: flex;
         flex-direction: column;
-        row-gap: 10px;
+        align-items: center;
 
+        figure {
+            width: 66%;
 
-        h2,
-        h3,
-        h4,
-        h5 {
-            transition: transform 0.3s;
-            color: #d3ffd9;
-            margin-bottom: 15px;
-            font-family: 'Arial', sans-serif;
-            text-align: center;
-
-            &:hover {
-                transform: translateY(-3px);
+            .certificateImg {
+                width: 44vw;
+                aspect-ratio: 1.41;
+                border-radius: 5px;
+                margin-top: 30px;
             }
 
-            &:first-child {
-                font-size: 2rem;
-                font-weight: bold;
-            }
-
-            &:nth-child(2) {
-                font-size: 1.75rem;
-                font-style: italic;
-            }
-
-            &:nth-child(3) {
-                font-size: 1.5rem;
-                text-decoration: underline;
-            }
-
-            &:nth-child(4) {
-                font-size: 1.25rem;
-                color: #ebffed;
+            figcaption {
+                font-size: 0.8em;
             }
         }
     }
+}
 
-    figure {
-        position: relative;
-        top: 70px;
-
-        img {
-            width: 550px;
+@media (width < 800px) {
+    .box__text {
+        .text__title {
+            font-size: 1em !important;
         }
 
-        figcaption {
-            position: absolute;
-            bottom: -20px;
-            font-family: cursive;
-            font-size: 14px;
+        .text__info {
+            font-size: 0.5em !important;
+            margin-bottom: 10px !important;
+        }
+
+        .text__goal {
+            font-size: 0.8em !important;
+            margin: 0 !important;
         }
     }
+}
 
-    .about__img{
-        width: 520px;
-        height: 390px;
+@media (width < 500px) {
+    .box__text {
+        .text__title {
+            font-size: 0.8em !important;
+        }
+
+        .text__info {
+            font-size: 0.3em !important;
+        }
+
+        .text__goal {
+            font-size: 0.5em !important;
+        }
     }
 }

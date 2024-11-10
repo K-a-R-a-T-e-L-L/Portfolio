@@ -52,7 +52,7 @@ const Home = () => {
 
     useEffect(() => {
         if (TranslationError) {
-            if (Phrase && Phrase !== t('phrase')) {
+            if (Phrase && Phrase !== t('homePage.phrase')) {
                 if (!Phrase.includes('TRANSLATION ERROR')) {
                     setPhrase((value) => value + TranslationError);
                 }
@@ -61,7 +61,7 @@ const Home = () => {
     }, [DisplayButton, TranslationError, Phrase]);
 
     useEffect(() => {
-        setPhrase(t('phrase'));
+        setPhrase(t('homePage.phrase'));
     }, [i18n.language]);
 
     useEffect(() => {
