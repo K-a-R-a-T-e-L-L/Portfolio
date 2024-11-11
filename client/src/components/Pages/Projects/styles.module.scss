@@ -1,6 +1,7 @@
 .projects {
     display: flex;
     justify-content: center;
+    align-items: center;
 
     .projects__box {
         width: 70%;
@@ -11,6 +12,11 @@
         flex-wrap: wrap;
         gap: 20px;
         justify-content: center;
+
+        .box__title{
+            width: 100%;
+            text-align: center;
+        }
 
         .box__project {
             border: 1px solid black;

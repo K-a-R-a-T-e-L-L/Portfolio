@@ -16,7 +16,7 @@ const Projects = () => {
     const [DataProjectsArray, setDataProjectsArray] = useState([]);
     const [MoreDataProject, setMoreDataProject] = useState();
     const [AddingNewProject, setAddingNewProject] = useState(false);
-    const { i18n } = useTranslation();
+    const { i18n, t } = useTranslation();
     const [DisplayButton, setDisplayButton] = useLocalStorage('page-language', 'ru');
 
     const changeLanguage = (language) => {
@@ -50,6 +50,7 @@ const Projects = () => {
                 <LanguageChangeButtons DisplayButton={DisplayButton} setDisplayButton={setDisplayButton} left={'30px'} />
                 <BackButton pathBack={'/'} />
                 <div className={style.projects__box}>
+                {!MoreDataProject && (<h3 className={style.box__title}>{t("projectsPage.title")}</h3>)}
                     {!MoreDataProject ? (
                         <>
                             {!AddingNewProject ? (

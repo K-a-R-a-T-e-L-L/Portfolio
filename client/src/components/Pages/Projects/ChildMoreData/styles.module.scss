@@ -39,6 +39,7 @@
     overflow-y: auto;
     overflow-x: hidden;
     position: relative;
+    // padding: 5px;
 
     .more_data__close {
         @include ButtonsFormat(30px, 30px, black, 20px, 10px, none);

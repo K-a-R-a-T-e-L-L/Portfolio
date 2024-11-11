@@ -19,7 +19,8 @@ const ChildMoreData = ({ DisplayButton, MoreDataProject, setMoreDataProject }) =
         set(e.target.value);
     };
 
-    const handleDeleteProject = () => {
+    const handleDeleteProject = (e) => {
+        e.preventDefault();
         const data = { idProject: DeleteProject, oneValue: ValueInputOne, twoValue: ValueInputTwo };
         axios.post(`${URLDeletingProject}`, data)
             .then((res) => {
@@ -40,7 +41,11 @@ const ChildMoreData = ({ DisplayButton, MoreDataProject, setMoreDataProject }) =
         return () => {
             window.removeEventListener('resize', () => {setWidthWindow(window.innerWidth)});
         };
-    });
+    }, []);
+
+    useEffect(() => {
+        setWidthWindow(window.innerWidth);
+    }, []);
 
     return (
         <div className={style.projects__more_data} style={DeleteProject && WidthWindow < 700 ? {maxHeight: '400px'} : null}>

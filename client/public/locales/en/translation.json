@@ -18,6 +18,7 @@
         "certificate": "- Certificate of completion of the JavaScript developer course"
     },
     "projectsPage": {
+        "title": "My projects",
         "adding": {
             "nameRu": "Russian name",
             "nameEn": "English name",

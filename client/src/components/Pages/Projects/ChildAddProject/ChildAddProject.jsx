@@ -39,7 +39,8 @@ const ChildAddProject = ({ setAddingNewProject }) => {
         set(e.target.value);
     };
 
-    const handleSendingData = () => {
+    const handleSendingData = (e) => {
+        e.preventDefault();
         if (ArrayFiles.length > 0 && ValueInfoRuTextarea !== '' && ValueInfoTextarea !== '' && ValueLinkInput !== '' && ValueNameInput !== '' && ValueNameRuInput !== '') {
             const data = new FormData();
             data.append('name', ValueNameInput);
@@ -72,7 +73,7 @@ const ChildAddProject = ({ setAddingNewProject }) => {
     }, []);
 
     return (
-        <div className={style.projects__adding_project}>
+        <form className={style.projects__adding_project}>
             {Valid && (
                 <><div className={style.adding_project__message_error}>Добавьте файл и заполните все поля!!!</div></>
             )}
@@ -128,7 +129,7 @@ const ChildAddProject = ({ setAddingNewProject }) => {
                     {t("projectsPage.adding.save")}
                 </button>
             </div>
-        </div>
+        </form>
     );
 };
 

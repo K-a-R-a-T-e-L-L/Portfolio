@@ -2,8 +2,6 @@
     position: absolute;
     min-height: 100%;
     width: 100%;
-    background-color: #121212;
-    color: #ffffff;
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
@@ -56,34 +54,19 @@
 
 @media (width < 800px) {
     .box__text {
+        margin-top: 70px !important;
         .text__title {
-            font-size: 1em !important;
+            font-size: 1.2em !important;
         }
 
         .text__info {
-            font-size: 0.5em !important;
+            font-size: 0.9em !important;
             margin-bottom: 10px !important;
         }
 
         .text__goal {
-            font-size: 0.8em !important;
+            font-size: 1em !important;
             margin: 0 !important;
-        }
-    }
-}
-
-@media (width < 500px) {
-    .box__text {
-        .text__title {
-            font-size: 0.8em !important;
-        }
-
-        .text__info {
-            font-size: 0.3em !important;
-        }
-
-        .text__goal {
-            font-size: 0.5em !important;
         }
     }
 }
